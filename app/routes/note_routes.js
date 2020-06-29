@@ -4,8 +4,7 @@ const getDb = require("../db").getDb;
 
 const { ObjectID } = require("mongodb");
 
-
-// module.exports = function(app) {
+const notesRoutes = (test) => {
     router.post('', (req, res) => {
         // Create note here
         const note = { text: req.body.body, title: req.body.title };
@@ -19,6 +18,7 @@ const { ObjectID } = require("mongodb");
     });
 
     router.get('/:id', (req, res) => {
+        console.log(test);
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
         getDb().db().collection('notes').findOne(details, (err, item) => {
@@ -54,6 +54,7 @@ const { ObjectID } = require("mongodb");
             }
         })
     });
-// }
+    return router;
+}
 
-module.exports = router
+module.exports = notesRoutes;

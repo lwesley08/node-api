@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 const noteRoutes = require('./note_routes');
 
-router.use('/notes', noteRoutes)
+const routes = (test) => {
+    console.log(test)
+    router.use('/notes', noteRoutes(test));
+    return router;
+}
 
-module.exports = router;
+module.exports = routes;
