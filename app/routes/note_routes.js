@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const getDb = require("../db").getDb;
+// const getDb = require("../db").getDb;
 
 const { ObjectID } = require("mongodb");
 
-const notesRoutes = (test) => {
+const notesRoutes = (getDb) => {
     router.post('', (req, res) => {
         // Create note here
         const note = { text: req.body.body, title: req.body.title };
@@ -18,7 +18,6 @@ const notesRoutes = (test) => {
     });
 
     router.get('/:id', (req, res) => {
-        console.log(test);
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
         getDb().db().collection('notes').findOne(details, (err, item) => {

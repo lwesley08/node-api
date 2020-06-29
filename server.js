@@ -9,7 +9,8 @@ const port = 8005;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var routes = require('./app/routes');
-app.use('/api', routes('param'));
+const getDb = require("./app/db").getDb;
+app.use('/api', routes(getDb));
 app.use("*", function(req, res) {
     res.send("App works!!!!!");
 });
