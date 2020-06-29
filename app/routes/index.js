@@ -1,9 +1,7 @@
+var express = require('express');
+var router = express.Router();
 const noteRoutes = require('./note_routes');
 
-module.exports = function(app, db) {
-    noteRoutes(app, db);
-    
-    app.get("*", function(req, res) {
-        res.send("App works!!!!!");
-    })
-}
+router.use('/notes', noteRoutes)
+
+module.exports = router;

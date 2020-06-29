@@ -1,10 +1,15 @@
+var express = require('express');
+var router = express.Router();
+const getDb = require("../db").getDb;
+
 const { ObjectID } = require("mongodb");
 
-module.exports = function(app, db) {
-    app.post('/notes', (req, res) => {
+
+// module.exports = function(app) {
+    router.post('', (req, res) => {
         // Create note here
         const note = { text: req.body.body, title: req.body.title };
-        db.db().collection('notes').insertOne(note, (err, result) => {
+        getDb().db().collection('notes').insertOne(note, (err, result) => {
             if (err) {
                 res.send( { 'error': 'An error has occured'});
             } else {
@@ -13,10 +18,10 @@ module.exports = function(app, db) {
         });
     });
 
-    app.get('/notes/:id', (req, res) => {
+    router.get('/:id', (req, res) => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
-        db.db().collection('notes').findOne(details, (err, item) => {
+        getDb().db().collection('notes').findOne(details, (err, item) => {
             if (err) {
                 res.send( { 'error': 'An error has occured'});
             } else {
@@ -25,10 +30,10 @@ module.exports = function(app, db) {
         })
     });
 
-    app.delete('/notes/:id', (req, res) => {
+    router.delete('/:id', (req, res) => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
-        db.db().collection('notes').deleteOne(details, (err, item) => {
+        getDb().db().collection('notes').deleteOne(details, (err, item) => {
             if (err) {
                 res.send( { 'error': 'An error has occured'});
             } else {
@@ -37,11 +42,11 @@ module.exports = function(app, db) {
         })
     });
 
-    app.put('/notes/:id', (req, res) => {
+    router.put('/:id', (req, res) => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
         const note = { text: req.body.body, title: req.body.title };
-        db.db().collection('notes').updateOne(details, note, (err, item) => {
+        getDb().db().collection('notes').updateOne(details, note, (err, item) => {
             if (err) {
                 res.send( { 'error': 'An error has occured'});
             } else {
@@ -49,4 +54,6 @@ module.exports = function(app, db) {
             }
         })
     });
-}
+// }
+
+module.exports = router

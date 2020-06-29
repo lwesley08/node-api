@@ -1,22 +1,22 @@
-const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
+
+var express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./config/db');
+const mongoUtil = require('./app/db');
 const app = express();
+var router = express.Router();
 
 const port = 8005;
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var routes = require('./app/routes');
+app.use('/api', routes);
+app.use("*", function(req, res) {
+    res.send("App works!!!!!");
+});
 
-MongoClient.connect(db.url,  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    }, 
-    (err, database) => {
-    if (err) return console.log(err);
-    require('./app/routes')(app, database);
+mongoUtil.initDb(function(err) {
     app.listen(port, () => {
         console.log("We are live on " + port);
-    })
-
+    });
 })
+
