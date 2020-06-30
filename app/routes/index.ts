@@ -2,7 +2,7 @@ import * as express from 'express';
 import User from './users';
 import { notesRoutes } from './notes';
 import { MongoClient } from 'mongodb';
-import { getDb } from '../db';
+import { getDb as _getDb } from '../db';
 
 class Routes {
     public router = express.Router();
@@ -14,4 +14,4 @@ class Routes {
     }
 }
 
-export default new Routes(getDb).router;
+export default new Routes(_getDb).router;

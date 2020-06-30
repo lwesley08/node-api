@@ -7,12 +7,11 @@ initDb((err: any) => {
     App.set('port', port);
     const server = http.createServer(App);
     server.listen(port);
-    
+
     server.on('listening', (): void => {
-        let addr = server.address();
-        let bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
-        console.log(`Listening on ${bind}`);
+        const addr = server.address();
+        const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
     });
-    
+
     module.exports = App;
 })

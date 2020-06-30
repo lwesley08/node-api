@@ -1,30 +1,28 @@
-import * as express from 'express';
+import { Request, Response } from 'express';
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
 const users = [{ firstName: 'fnam1', lastName: 'lnam1', userName: 'username1' }];
 
 // request to get all the users
-router.get("/users", (req,res,next) => {
-    console.log("url:::::::"+req.url)
+router.get('/users', (req: Request, res: Response): void => {
     res.json(users);
 })
 
 // request to get all the users by userName
-router.get("/users/:userName", (req,res,next) => {
-    console.log("url:::::::"+req.url)
-    let user = users.filter(function(user){
-        if(req.params.userName === user.userName){
-            return user;
+router.get('/users/:userName', (req: Request, res: Response): void => {
+    const user = users.filter((u) => {
+        if(req.params.userName === u.userName){
+            return u;
         }
     })
     res.json(user);
 })
 
 // request to post the user
-// req.body has object of type {firstName:"fnam1",lastName:"lnam1",userName:"username1"}
-router.post("/user", (req,res,next) => {
-    console.log("url:::::::"+req.url)
+// req.body has object of type {firstName:'fnam1',lastName:'lnam1',userName:'username1'}
+router.post('/user', (req: Request, res: Response): void  => {
     users.push(req.body);
     res.json(users);
 })

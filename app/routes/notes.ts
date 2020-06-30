@@ -1,10 +1,11 @@
 import * as express from 'express';
 import { ObjectID, MongoClient } from 'mongodb';
+import { Request, Response } from 'express'
 
 const router = express.Router();
 
 export const notesRoutes = (getDb: () => MongoClient) => {
-    router.post('', (req, res) => {
+    router.post('', (req: Request, res: Response): void => {
         // Create note here
         const note = { text: req.body.body, title: req.body.title };
         getDb().db().collection('notes').insertOne(note, (err, result) => {
@@ -16,7 +17,7 @@ export const notesRoutes = (getDb: () => MongoClient) => {
         });
     });
 
-    router.get('/:id', (req, res) => {
+    router.get('/:id', (req: Request, res: Response): void => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
         getDb().db().collection('notes').findOne(details, (err, item) => {
@@ -28,7 +29,7 @@ export const notesRoutes = (getDb: () => MongoClient) => {
         })
     });
 
-    router.delete('/:id', (req, res) => {
+    router.delete('/:id', (req: Request, res: Response): void => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
         getDb().db().collection('notes').deleteOne(details, (err, item) => {
@@ -40,7 +41,7 @@ export const notesRoutes = (getDb: () => MongoClient) => {
         })
     });
 
-    router.put('/:id', (req, res) => {
+    router.put('/:id', (req, res): void => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id) };
         const note = { text: req.body.body, title: req.body.title };
@@ -52,6 +53,6 @@ export const notesRoutes = (getDb: () => MongoClient) => {
             }
         })
     });
+
     return router;
 }
-

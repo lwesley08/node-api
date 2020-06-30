@@ -21,7 +21,7 @@ class App {
         this.express.use('/api', Routes);
         // handle undefined routes
         this.express.use('*', (req,res,next) => {
-            res.send("Make sure url is correct!!!");
+            res.send('Make sure url is correct!!!');
         });
 
     }
