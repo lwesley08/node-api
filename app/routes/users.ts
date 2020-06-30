@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-var router = express.Router();
+const router = express.Router();
 
 const users = [{ firstName: 'fnam1', lastName: 'lnam1', userName: 'username1' }];
 

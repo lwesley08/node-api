@@ -1,10 +1,9 @@
-var express = require('express');
-var router = express.Router();
-// const getDb = require("../db").getDb;
+import * as express from 'express';
+import { ObjectID, MongoClient } from 'mongodb';
 
-const { ObjectID } = require("mongodb");
+const router = express.Router();
 
-const notesRoutes = (getDb) => {
+export const notesRoutes = (getDb: () => MongoClient) => {
     router.post('', (req, res) => {
         // Create note here
         const note = { text: req.body.body, title: req.body.title };
@@ -56,4 +55,3 @@ const notesRoutes = (getDb) => {
     return router;
 }
 
-module.exports = notesRoutes;
