@@ -6,7 +6,7 @@
   "scripts": {
     "prod": "node dist/api.bundle.js",
     "build": "webpack",
-    "start": "node --inspect=3070 -r ts-node/register ./index.ts",
+    "start": "node -r ts-node/register ./index.ts",
     "start:dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
