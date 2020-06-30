@@ -1,11 +1,11 @@
-import * as express from 'express';
+import { Router } from 'express';
 import User from './users';
 import { notesRoutes } from './notes';
 import { MongoClient } from 'mongodb';
 import { getDb as _getDb } from '../db';
 
 class Routes {
-    public router = express.Router();
+    public router: Router = Router();
 
     constructor(getDb: () => MongoClient) {
         // this.router.use('/notes', noteRoutes(test));

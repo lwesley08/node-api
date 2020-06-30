@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { Router } from 'express';
 
-const router = Router();
+const router: Router = Router();
 
-const users = [{ firstName: 'fnam1', lastName: 'lnam1', userName: 'username1' }];
+const users: any[] = [{ firstName: 'fnam1', lastName: 'lnam1', userName: 'username1' }];
 
 // request to get all the users
 router.get('/users', (req: Request, res: Response): void => {
@@ -12,7 +12,7 @@ router.get('/users', (req: Request, res: Response): void => {
 
 // request to get all the users by userName
 router.get('/users/:userName', (req: Request, res: Response): void => {
-    const user = users.filter((u) => {
+    const user: any = users.filter((u: any): any => {
         if(req.params.userName === u.userName){
             return u;
         }

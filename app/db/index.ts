@@ -3,17 +3,17 @@ import dbConfig from '../../config/db';
 
 let _db: Mongo.MongoClient;
 
-const connecctionOptions = {
+const connectionOptions: any = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
 };
-
-export const initDb = (callback?: any) => {
+// TODO types
+export const initDb: (cb?: any) => any = (callback?: any): any => {
     if (_db) {
         return callback(null, _db);
     }
-    Mongo.connect(dbConfig.url,  connecctionOptions,
-        (err, db) => {
+    Mongo.connect(dbConfig.url,  connectionOptions,
+        (err: Mongo.MongoError, db: Mongo.MongoClient): any => {
             if (err) {
                 return callback(err);
             }
@@ -23,7 +23,7 @@ export const initDb = (callback?: any) => {
     )
 }
 
-export const getDb = () => {
+export const getDb: () => Mongo.MongoClient = (): Mongo.MongoClient => {
     if (!_db) {
         initDb();
     }

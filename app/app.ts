@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import Routes from './routes';
+import { Request, Response } from 'express'
 
 class App {
     public express: express.Application;
@@ -20,7 +21,7 @@ class App {
     private routes(): void {
         this.express.use('/api', Routes);
         // handle undefined routes
-        this.express.use('*', (req,res,next) => {
+        this.express.use('*', (req: Request, res: Response): void => {
             res.send('Make sure url is correct!!!');
         });
 
