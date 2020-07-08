@@ -2,7 +2,7 @@ import IControllerBase from '../interfaces/IControllerBase';
 import { ObjectID, MongoClient, FilterQuery, MongoError, UpdateWriteOpResult, InsertOneWriteOpResult } from 'mongodb';
 import { Request, Response } from 'express';
 import { Router } from 'express';
-import Note from '../models/Note';
+import Note, { INote } from '../models/Note';
 
 export default class NotesController implements IControllerBase {
     public path: string = '/notes';
@@ -15,8 +15,8 @@ export default class NotesController implements IControllerBase {
     public initRoutes(): void {
         this.router.post('', (req: Request, res: Response): void => {
             // Create note here
-            const note: any = new Note({ text: req.body.body, title: req.body.title });
-            note.save().then((doc: any): void => {
+            const note: INote = new Note({ text: req.body.body, title: req.body.title });
+            note.save().then((doc: INote): void => {
                 res.send(doc);
             })
             .catch((err: any): void => {
@@ -27,7 +27,7 @@ export default class NotesController implements IControllerBase {
         this.router.get('/:id', (req: Request, res: Response): void => {
             const id: string = req.params.id;
             Note.findById(id)
-            .then((doc: any): void => {
+            .then((doc: INote): void => {
                 res.send(doc);
             })
             .catch((err: any): void => {
@@ -38,7 +38,7 @@ export default class NotesController implements IControllerBase {
         this.router.delete('/:id', (req: Request, res: Response): void => {
             const id: string = req.params.id;
             Note.findByIdAndDelete(id)
-            .then((doc: any): void => {
+            .then((doc: INote): void => {
                 res.send('Note ' + id + ' deleted');
             })
             .catch((err: any): void => {
@@ -48,12 +48,13 @@ export default class NotesController implements IControllerBase {
 
         this.router.put('/:id', (req: Request, res: Response): void => {
             const id: string = req.params.id;
-            Note.findByIdAndUpdate(id, { text: req.body.body, title: req.body.title},
+            const note: INote = new Note({ text: req.body.body, title: req.body.title});
+            Note.findByIdAndUpdate(id, note,
                 {
                     new: true,                       // return updated doc
                     runValidators: true              // validate before update
                 })
-            .then((doc: any): void => {
+            .then((doc: INote): void => {
                 res.send(doc);
             })
             .catch((err: any): void => {

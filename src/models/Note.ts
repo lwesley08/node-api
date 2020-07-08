@@ -1,6 +1,12 @@
 import * as mongoose from 'mongoose';
+import { Document } from 'mongoose';
 import validator from 'validator';
 // let timestampPlugin = require('./plugins/timestamp')
+
+export interface INote extends Document {
+    text: string;
+    title: string;
+}
 
 const noteSchema: any = new mongoose.Schema({
     text: {
@@ -37,4 +43,4 @@ const noteSchema: any = new mongoose.Schema({
 //     public title: string;
 // }
 
-export default mongoose.model('Note', noteSchema);
+export default mongoose.model<INote>('Note', noteSchema);
