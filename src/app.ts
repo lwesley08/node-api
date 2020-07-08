@@ -2,16 +2,18 @@ import * as express from 'express';
 import { Application } from 'express';
 import { Request, Response } from 'express';
 import IControllerBase from './interfaces/IControllerBase';
-import { initDb } from './mongo';
+// import { initDb } from './mongo';
+import { Database } from './database'
 
 class App {
     public app: Application;
     public port: number;
+    public db: Database;
 
     constructor (appInit: { port: number; middleware: any; controllers: any; }) {
         this.app = express();
         this.port = appInit.port;
-        initDb((err: any): void => { console.debug(err) });
+        this.db = new Database();
         this.middleware(appInit.middleware);
         this.routes(appInit.controllers);
         // this.assets();
