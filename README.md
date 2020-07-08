@@ -16,7 +16,7 @@ then access db.collection('notes');
 Nodemon is for HMR
 
 Curl Tests
-$ curl -d "title=MacTest&body=CoolNote" http://localhost:8005/api/notes
+$ curl -d "title=MacTest&body=CoolNote" http://localhost:5000/api/notes
 {"text":"CoolNote","title":"MacTest","_id":"5ef13ec78c254367b588375c"}
 
 $ curl http://localhost:8005/api/notes/5ef13ec78c254367b588375c
