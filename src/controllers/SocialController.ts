@@ -50,7 +50,7 @@ export default class SocialController implements IControllerBase {
 
         this.router.get('/message/:id', (req: Request, res: Response): void => {
             const id: string = req.params.id;
-            Chat.findById(id)
+            Chat.findById(id).populate('user_id')
             .then((doc: IChat): void => {
                 res.send(doc);
             })

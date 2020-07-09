@@ -5,12 +5,12 @@ import { IUser } from './User';
 
 export interface IChat extends Document {
     message: string;
-    user_id: IUser['_id'];
+    user_id: IUser['_id'] | IUser;
 }
 
 const userSchema: any = new mongoose.Schema({
     message: { type: String, required: true },
-    user_id: { type: Schema.Types.ObjectId, required: true },
+    user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 export default mongoose.model<IChat>('Chat', userSchema);
