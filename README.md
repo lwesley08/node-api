@@ -70,3 +70,10 @@ curl http://localhost:5000/social/message/5f077cfaff74e247d46be4e1
 
 ### Mongoose Populate => https://mongoosejs.com/docs/populate.html
 
+It would be more correct for chat to have a user prop instead of user_id but i didn't do that
+then chat.user._id would work either way
+and could be checked for chat.populated('user')
+can also do populate('user', 'firstName') or query more specifically
+
+can also have a populated interface vs not and export the model differently if necessary
+https://medium.com/@agentwhs/complete-guide-for-typescript-for-mongoose-for-node-js-8cc0a7e470c1
