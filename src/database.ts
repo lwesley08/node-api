@@ -4,7 +4,7 @@ import dbConfig from './config/db';
 export class Database {
     constructor() {
         this.connect();
-        mongoose.connection.on('disconnected', this.connect);
+        // mongoose.connection.on('disconnected', this.connect);
     }
 
     public connect(): void {
