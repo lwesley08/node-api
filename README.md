@@ -55,3 +55,16 @@ just this did not work
 ### https://medium.com/@agentwhs/complete-guide-for-typescript-for-mongoose-for-node-js-8cc0a7e470c1
 
 
+```
+$ curl -d "firstName=Bob&lastName=Jones" http://localhost:5000/social/user
+{"_id":"5f077c1eff74e247d46be4e0","firstName":"Bob","lastName":"Jones","__v":0}
+
+$ curl -d "message=Hello&user_id=5f077c1eff74e247d46be4e0" http://localhost:5000/social/message
+{"_id":"5f077cfaff74e247d46be4e1","message":"Hello","user_id":"5f077c1eff74e247d46be4e0","__v":0}
+
+curl http://localhost:5000/social/user/5f077c1eff74e247d46be4e0
+curl http://localhost:5000/social/message/5f077cfaff74e247d46be4e1
+
+
+```
+
