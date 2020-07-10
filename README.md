@@ -77,3 +77,9 @@ can also do populate('user', 'firstName') or query more specifically
 
 can also have a populated interface vs not and export the model differently if necessary
 https://medium.com/@agentwhs/complete-guide-for-typescript-for-mongoose-for-node-js-8cc0a7e470c1
+
+### Passport
+https://itnext.io/implementing-json-web-tokens-passport-js-in-a-javascript-application-with-react-b86b1f313436
+
+$ curl -d "first_name=John&last_name=Smith&email=fakeemail&username=jsmith99&password=mybirthday" http://localhost:5000/passport/registerUser
+$ curl -d "username=jsmith99&password=mybirthday" http://localhost:5000/passport/registerUser

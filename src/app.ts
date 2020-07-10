@@ -4,6 +4,9 @@ import { Request, Response } from 'express';
 import IControllerBase from './interfaces/IControllerBase';
 // import { initDb } from './mongo';
 import { Database } from './database'
+import * as Cors from 'cors';
+import * as passport from 'passport';
+import { passportSetup } from './config/passport';
 
 class App {
     public app: Application;
@@ -13,11 +16,18 @@ class App {
     constructor (appInit: { port: number; middleware: any; controllers: any; }) {
         this.app = express();
         this.port = appInit.port;
-        this.db = new Database();
+        // this.app.use(Cors);  // TODO
+        this.db = new Database(); // mongo
         this.middleware(appInit.middleware);
+        this.passport();
         this.routes(appInit.controllers);
         // this.assets();
         // this.template();
+    }
+
+    private passport(): void {
+        passportSetup();
+        this.app.use(passport.initialize())
     }
 
     private middleware(middleware: any[]): void { // ?
