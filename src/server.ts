@@ -26,7 +26,7 @@ container.register({
     passportSetup: asFunction(passportSetup),
 });
 
-container.resolve('passportSetup')
+container.resolve('passportSetup') // TODO make passportsetup a class and call .setup in app so it can be injected there
 
 const app: App = new App({
     port: 5000,
