@@ -15,6 +15,9 @@ export default class UsersController implements IControllerBase {
     }
 
     public initRoutes(): void {
+        // TODO init routes can just be the route and connect it to a method that is 
+        // defined on the controller
+        // ie this.router.get('', this.getUsers)
         // request to get all the users
         this.router.get('/users', (req: Request, res: Response): void => {
             this.util.testMethod();
