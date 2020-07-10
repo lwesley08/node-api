@@ -7,6 +7,7 @@ import { Database } from './database'
 import * as Cors from 'cors';
 import * as passport from 'passport';
 import { passportSetup } from './config/passport';
+// import { passportSetup } from './config/passport';
 
 class App {
     public app: Application;
@@ -35,7 +36,6 @@ class App {
     }
 
     private passport(): void {
-        passportSetup();
         this.app.use(passport.initialize())
     }
 

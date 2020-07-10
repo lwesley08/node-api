@@ -4,10 +4,18 @@ import * as passport from 'passport';
 import { Strategy as localStrategy, IVerifyOptions } from 'passport-local';
 import { Strategy as JWTstrategy, ExtractJwt, StrategyOptions, VerifiedCallback } from 'passport-jwt';
 import PassportUser, { IPassportUser } from '../models/PassportUser';
+import UserInfo from '../services/userInfo';
 
 const BCRYPT_SALT_ROUNDS: number = 12;
 
-export const passportSetup: () => void = (): void => {
+let userContext: UserInfo = null;
+
+export function passportSetup({ userInfo }: {userInfo: UserInfo}): void {
+
+    console.log('here');
+
+userContext = userInfo;
+
 passport.use(
     'register',
     new localStrategy(
@@ -87,6 +95,7 @@ passport.use(
             }).then((user: IPassportUser): void => {
                 if (user) {
                     console.debug('user found in db in passport');
+                    userContext.username = user.username;
                     done(null, user);
                 } else {
                     console.debug('user not found in db');
