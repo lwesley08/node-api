@@ -86,3 +86,5 @@ $ curl -d "username=jsmith99&password=mybirthday" http://localhost:5000/passport
 {"auth":true,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpzbWl0aDk5IiwiaWF0IjoxNTk0NDEwOTcyfQ.wZPXtXeeav3oxbSMqDgQ-MZck-5kAF1n0EHZCZ37M2s","message":"user found & logged in"}
 
 $ curl -i -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpzbWl0aDk5IiwiaWF0IjoxNTk0NDEwOTcyfQ.wZPXtXeeav3oxbSMqDgQ-MZck-5kAF1n0EHZCZ37M2s" http://localhost:5000/passport/findUser
+
+curl -i -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpzbWl0aDk5IiwiaWF0IjoxNTk0NDEwOTcyfQ.wZPXtXeeav3oxbSMqDgQ-MZck-5kAF1n0EHZCZ37M2s" -d "title=MacTest&body=CoolNote" http://localhost:5000/notes

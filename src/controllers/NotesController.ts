@@ -3,6 +3,7 @@ import { ObjectID, MongoClient, FilterQuery, MongoError, UpdateWriteOpResult, In
 import { Request, Response } from 'express';
 import { Router } from 'express';
 import Note, { INote } from '../models/Note';
+import passport = require('passport');
 
 export default class NotesController implements IControllerBase {
     public path: string = '/notes';
@@ -13,16 +14,7 @@ export default class NotesController implements IControllerBase {
     }
 
     public initRoutes(): void {
-        this.router.post('', (req: Request, res: Response): void => {
-            // Create note here
-            const note: INote = new Note({ text: req.body.body, title: req.body.title });
-            note.save().then((doc: INote): void => {
-                res.send(doc);
-            })
-            .catch((err: any): void => {
-                res.send( { 'error': 'An error has occured'});
-            })
-        });
+        this.router.post('', passport.authenticate('jwt', { session: false }), this.postNote);
 
         this.router.get('/:id', (req: Request, res: Response): void => {
             const id: string = req.params.id;
@@ -61,6 +53,17 @@ export default class NotesController implements IControllerBase {
                 res.send( { 'error': 'An error has occured'});
             })
         });
+    }
+
+    private postNote(req: Request, res: Response): void {
+        // Create note here
+        const note: INote = new Note({ text: req.body.body, title: req.body.title });
+        note.save().then((doc: INote): void => {
+            res.send(doc);
+        })
+        .catch((err: any): void => {
+            res.send( { 'error': 'An error has occured'});
+        })
     }
 
 }
