@@ -51,7 +51,7 @@ export default class PassportController implements IControllerBase {
             })(req, res, next);
         });
 
-        this.router.get('/loginUser',  (req: Request, res: Response, next: NextFunction): void => {
+        this.router.post('/loginUser',  (req: Request, res: Response, next: NextFunction): void => {
             passport.authenticate('login', (err: any, user: any, info: any): void => {
                 if (err) {
                     console.debug(err);
