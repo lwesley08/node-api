@@ -7,15 +7,17 @@ import loggerMiddleware from './middleware/logger';
 import UsersController from './controllers/UsersController';
 import NotesController from './controllers/NotesController';
 import SocialController from './controllers/SocialController';
+import UtilService from './services/utility';
 
 const container: AwilixContainer = createContainer({
     injectionMode: InjectionMode.PROXY
 });
 
 container.register({
+    utilService: asClass(UtilService),
     socialController: asClass(SocialController),
     userController: asClass(UsersController),
-    notesController: asClass(NotesController)
+    notesController: asClass(NotesController),
 });
 
 const app: App = new App({
@@ -23,7 +25,7 @@ const app: App = new App({
     controllers: [
         container.resolve('userController'),
         container.resolve('notesController'),
-        container.resolve('socialController')
+        container.resolve('socialController'),
     ],
     middleware: [
         bodyParser.json(),

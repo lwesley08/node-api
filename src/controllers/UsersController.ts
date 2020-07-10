@@ -1,19 +1,23 @@
 import IControllerBase from '../interfaces/IControllerBase';
 import { Request, Response } from 'express';
 import { Router } from 'express';
+import UtilService from '../services/utility';
 
 export default class UsersController implements IControllerBase {
     public path: string = '/';
     public router: Router = Router();
     private users: any[] = [{ firstName: 'fnam1', lastName: 'lnam1', userName: 'username1' }];
+    private util: UtilService;
 
-    constructor() {
+    constructor({ utilService }: { utilService: UtilService}) {
+        this.util = utilService;
         this.initRoutes();
     }
 
     public initRoutes(): void {
         // request to get all the users
         this.router.get('/users', (req: Request, res: Response): void => {
+            this.util.testMethod();
             res.json(this.users);
         });
 
