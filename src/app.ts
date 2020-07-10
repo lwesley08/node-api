@@ -20,13 +20,13 @@ class App {
         // this.template();
     }
 
-    private middleware(middleware: { forEach: (arg0: (m: any) => void) => void; }): void { // ?
+    private middleware(middleware: any[]): void { // ?
         middleware.forEach((m: any): void => {
             this.app.use(m)
         })
     }
 
-    private routes(controllers: { forEach: (arg0: (controller: IControllerBase) => void) => void; }): void {
+    private routes(controllers: IControllerBase[]): void {
         controllers.forEach((controller: any): void => {
             this.app.use(controller.path, controller.router)
         });
