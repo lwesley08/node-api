@@ -16,13 +16,22 @@ class App {
     constructor (appInit: { port: number; middleware: any; controllers: any; }) {
         this.app = express();
         this.port = appInit.port;
-        // this.app.use(Cors);  // TODO
+        this.useCors();
         this.db = new Database(); // mongo
         this.middleware(appInit.middleware);
         this.passport();
         this.routes(appInit.controllers);
         // this.assets();
         // this.template();
+    }
+
+    private useCors(): void {
+        const corsOptions: any = {
+            credentials: true,
+            origin: [],
+            optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        };
+        this.app.use(Cors(corsOptions));
     }
 
     private passport(): void {
