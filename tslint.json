@@ -1,0 +1,25 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "quotemark": [ true, "single" ],
+        "max-line-length": [ true, 225 ],
+        "no-console": {
+            "severity": "warning",
+            "options": [
+              "info",
+              "log",
+              "time",
+              "timeEnd",
+              "trace"
+            ]
+        },
+        "typedef": [ true, "array-destructuring", "arrow-call-signature", "arrow-parameter", "call-signature", "member-variable-declaration", "object-destructuring", "parameter", "property-declaration", "variable-declaration" ],
+        "variable-name": [ true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case", "allow-snake-case" ]
+    },
+    "rulesDirectory": [],
+    "linterOptions": { "exclude": ["node_modules", "dist"] }
+}
